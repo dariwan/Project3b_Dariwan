@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,8 +21,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        SetSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //SetSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -49,8 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void SetSupportActionBar(Toolbar toolbar) {
-    }
+    //private void SetSupportActionBar(Toolbar toolbar) {
+    //}
 
     boolean isValidation(){
         if (editUsername.getText().toString().equals("") ||

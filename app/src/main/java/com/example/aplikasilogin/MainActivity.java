@@ -1,18 +1,20 @@
 package com.example.aplikasilogin;
 
-import android.app.AlertDialog;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("Halaman Depan");
 
@@ -57,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         bacaFileLogin();
     }
 
-    private void setSupportActionBar(Toolbar toolbar) {
-    }
+   // private void setSupportActionBar(Toolbar toolbar) {
+   // }
 
     void bacaFileLogin() {
         File sdcard = getFilesDir();
@@ -83,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void bacaDataUser(String s){
+    void bacaDataUser(String fileName){
         File sdcard = getFilesDir();
-        File file = new File(sdcard, FILENAME);
+        File file = new File(sdcard, fileName);
 
         if (file.exists()){
             StringBuilder text = new StringBuilder();
@@ -114,20 +116,17 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "User Tidak Ditemukan", Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.action_logout:
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.exit:
                 tampilkanDialogKonfirmasiLogout();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     void hapusFile(){
         File file = new File(getFilesDir(), FILENAME);
@@ -152,4 +151,40 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(android.R.string.no, null).show();
     }
+
+    //menu logout
+    //agar menu item bisa di klik
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.optionmenu,menu);
+        return true;
+    }
+
+    //dialog menu item
+    /*@Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if (id == R.id.exit){
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("Apakah Anda Yakin Ingin Keluar?");
+            builder.setCancelable(true);
+
+            builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+        return true;
+    }*/
 }
